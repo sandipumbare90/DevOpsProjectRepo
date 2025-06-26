@@ -1,11 +1,20 @@
-# -----------------------------------------------------------------------------
+data "google_compute_network" "existing_vpc" {
+  name    = var.network_name
+  project = var.project_id # Explicitly specify project for data source
+}
 
+data "google_compute_subnetwork" "existing_gke_subnet" {
+  name    = var.subnet_name
+  region  = var.region
+  project = var.project_id # Explicitly specify project for data source
+  network = data.google_compute_network.existing_vpc.name # Link to the data source for the network
+}
 resource "google_container_cluster" "primary_gke_cluster" {
   name                     = var.cluster_name
   location                 = var.gcp_region # For zonal cluster, use zone; for regional, use region
   project                  = var.gcp_project_id
-  network                  = google_compute_network.gke_vpc_network.self_link
-  subnetwork               = google_compute_subnetwork.gke_subnet.self_link
+  network                  = data.google_compute_network.gke_vpc_network.self_link
+  subnetwork               = data.google_compute_subnetwork.gke_subnet.self_link
 
   workload_identity_config {
   }
@@ -19,8 +28,8 @@ resource "google_container_cluster" "primary_gke_cluster" {
   }
 
   ip_allocation_policy {
-    cluster_secondary_range_name = google_compute_subnetwork.gke_subnet.secondary_ip_range[0].range_name # gke-pods
-    services_secondary_range_name = google_compute_subnetwork.gke_subnet.secondary_ip_range[1].range_name # gke-services
+    cluster_secondary_range_name =  "ip-pod-ranges"# gke-pods
+    services_secondary_range_name = "ip-service-ranges" # gke-services
   }
 
   initial_node_count = var.initial_node_count
