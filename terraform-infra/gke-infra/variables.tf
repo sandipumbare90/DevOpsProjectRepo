@@ -29,3 +29,13 @@ variable "initial_node_count" {
   default     = 1 # Start small, autoscaling will handle growth
 }
 
+variable "min_node_count" {
+  description = "The initial number of nodes in the default node pool."
+  type        = number
+}
+
+variable "max_node_count" {
+  description = "The initial number of nodes in the default node pool."
+  type        = number
+}
+
