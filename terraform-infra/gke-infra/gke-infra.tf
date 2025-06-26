@@ -7,7 +7,7 @@ data "google_compute_subnetwork" "existing_gke_subnet" {
   name    = "asia-south-sn-01"
   region  = var.region
   project = "mydevopsproject-464107" # Explicitly specify project for data source
-  network = data.google_compute_network.existing_vpc.name # Link to the data source for the network
+  network = "my-first-vpc" # Link to the data source for the network
 }
 resource "google_container_cluster" "primary_gke_cluster" {
   name                     = var.cluster_name
