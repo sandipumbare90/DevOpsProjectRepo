@@ -1,6 +1,6 @@
 provider "google" {
   project = var.gcp_project_id
   region  = var.gcp_region # e.g., "us-central1" or "europe-west1"
-  zone    = var.gcp_zone   # e.g., "us-central1-c" or "europe-west1-b"
+  impersonate_service_account = "cicd-sa@mydevopsproject-464107.iam.gserviceaccount.com"
 }
 
