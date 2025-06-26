@@ -2,7 +2,7 @@
 
 resource "google_container_cluster" "primary_gke_cluster" {
   name                     = var.cluster_name
-  location                 = var.gcp_zone # For zonal cluster, use zone; for regional, use region
+  location                 = var.gcp_region # For zonal cluster, use zone; for regional, use region
   project                  = var.gcp_project_id
   network                  = google_compute_network.gke_vpc_network.self_link
   subnetwork               = google_compute_subnetwork.gke_subnet.self_link
@@ -42,7 +42,6 @@ resource "google_container_cluster" "primary_gke_cluster" {
     }
   }
   node_pool_autoscaling {
-    location = var.gcp_zone # Must match the node pool's location
     min_node_count = var.min_node_count
     max_node_count = var.max_node_count
   }
