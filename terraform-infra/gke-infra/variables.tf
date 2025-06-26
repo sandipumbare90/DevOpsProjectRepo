@@ -1,11 +1,13 @@
 variable "gcp_project_id" {
   description = "The GCP project ID where the GKE cluster will be created."
   type        = string
+  default     = "mydevopsproject-464107"
 }
 
 variable "gcp_region" {
   description = "The GCP region for the GKE cluster (e.g., 'us-central1')."
   type        = string
+  default     = "asia-south1"
 }
 
 variable "gcp_zone" {
@@ -19,17 +21,6 @@ variable "cluster_name" {
   default     = "my-gke-cluster"
 }
 
-variable "network_name" {
-  description = "The name for the VPC network."
-  type        = string
-  default     = "gke-network"
-}
-
-variable "subnet_name" {
-  description = "The name for the subnet."
-  type        = string
-  default     = "gke-subnet"
-}
 
 variable "machine_type" {
   description = "The machine type for the GKE nodes."
