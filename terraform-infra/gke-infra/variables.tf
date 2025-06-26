@@ -10,11 +10,6 @@ variable "gcp_region" {
   default     = "asia-south1"
 }
 
-variable "gcp_zone" {
-  description = "The GCP zone for the GKE cluster's primary location (e.g., 'us-central1-c')."
-  type        = string
-}
-
 variable "cluster_name" {
   description = "The name for the GKE cluster."
   type        = string
