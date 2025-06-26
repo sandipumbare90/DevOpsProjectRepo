@@ -23,10 +23,6 @@ resource "google_container_cluster" "primary_gke_cluster" {
     channel = "REGULAR"
   }
 
-  #autoscaling {
-    location_policy = "ANY" # Use "ANY" for regional clusters to scale across zones
-  }
-
   ip_allocation_policy {
     cluster_secondary_range_name =  var.ip_range_pods# gke-pods
     services_secondary_range_name = var.ip_range_services # gke-services
@@ -49,10 +45,6 @@ resource "google_container_cluster" "primary_gke_cluster" {
     workload_metadata_config {
       mode = "GKE_METADATA" # Recommended mode for Workload Identity
     }
-  }
-  #node_pool_autoscaling {
-    min_node_count = var.min_node_count
-    max_node_count = var.max_node_count
   }
 
 }
