@@ -11,8 +11,8 @@ data "google_compute_subnetwork" "existing_gke_subnet" {
 }
 resource "google_container_cluster" "primary_gke_cluster" {
   name                     = var.cluster_name
-  location                 = var.gcp_region # For zonal cluster, use zone; for regional, use region
-  project                  = var.gcp_project_id
+  location                 = var.region # For zonal cluster, use zone; for regional, use region
+  project                  = var.project_id
   network                  = data.google_compute_network.existing_vpc.self_link
   subnetwork               = data.google_compute_subnetwork.existing_gke_subnet.self_link
 
