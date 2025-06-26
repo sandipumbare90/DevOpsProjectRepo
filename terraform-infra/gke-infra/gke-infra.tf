@@ -13,8 +13,8 @@ resource "google_container_cluster" "primary_gke_cluster" {
   name                     = var.cluster_name
   location                 = var.gcp_region # For zonal cluster, use zone; for regional, use region
   project                  = var.gcp_project_id
-  network                  = data.google_compute_network.gke_vpc_network.self_link
-  subnetwork               = data.google_compute_subnetwork.gke_subnet.self_link
+  network                  = data.google_compute_network.existing_vpc.self_link
+  subnetwork               = data.google_compute_subnetwork.existing_gke_subnet.self_link
 
   workload_identity_config {
   }
