@@ -23,7 +23,7 @@ resource "google_container_cluster" "primary_gke_cluster" {
     channel = "REGULAR"
   }
 
-  autoscaling {
+  #autoscaling {
     location_policy = "ANY" # Use "ANY" for regional clusters to scale across zones
   }
 
@@ -50,7 +50,7 @@ resource "google_container_cluster" "primary_gke_cluster" {
       mode = "GKE_METADATA" # Recommended mode for Workload Identity
     }
   }
-  node_pool_autoscaling {
+  #node_pool_autoscaling {
     min_node_count = var.min_node_count
     max_node_count = var.max_node_count
   }
