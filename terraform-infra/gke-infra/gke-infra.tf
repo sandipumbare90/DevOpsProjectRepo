@@ -28,8 +28,8 @@ resource "google_container_cluster" "primary_gke_cluster" {
   }
 
   ip_allocation_policy {
-    cluster_secondary_range_name =  "ip-pod-ranges"# gke-pods
-    services_secondary_range_name = "ip-service-ranges" # gke-services
+    cluster_secondary_range_name =  var.ip_range_pods# gke-pods
+    services_secondary_range_name = var.ip_service_ranges # gke-services
   }
 
   initial_node_count = var.initial_node_count
