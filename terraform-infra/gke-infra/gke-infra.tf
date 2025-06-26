@@ -1,12 +1,12 @@
 data "google_compute_network" "existing_vpc" {
-  name    = var.network_name
+  name    = "my-first-vpc"
   project = "mydevopsproject-464107" # Explicitly specify project for data source
 }
 
 data "google_compute_subnetwork" "existing_gke_subnet" {
-  name    = var.subnet_name
+  name    = "asia-south-sn-01"
   region  = var.region
-  project = var.project_id # Explicitly specify project for data source
+  project = "mydevopsproject-464107" # Explicitly specify project for data source
   network = data.google_compute_network.existing_vpc.name # Link to the data source for the network
 }
 resource "google_container_cluster" "primary_gke_cluster" {
@@ -60,29 +60,29 @@ resource "google_container_cluster" "primary_gke_cluster" {
 resource "google_service_account" "gke_node_sa" {
   account_id   = "${var.cluster_name}-node-sa"
   display_name = "Service Account for GKE Node Pool"
-  project      = var.gcp_project_id
+  project      = var.project_id
 }
 
 resource "google_project_iam_member" "gke_node_sa_roles" {
-  project = var.gcp_project_id
+  project = var.project_id
   role    = "roles/logging.logWriter" # Allows writing logs
   member  = "serviceAccount:${google_service_account.gke_node_sa.email}"
 }
 
 resource "google_project_iam_member" "gke_node_sa_monitoring_viewer" {
-  project = var.gcp_project_id
+  project = var.project_id
   role    = "roles/monitoring.metricWriter" # Allows sending metrics
   member  = "serviceAccount:${google_service_account.gke_node_sa.email}"
 }
 
 resource "google_project_iam_member" "gke_node_sa_container_registry_reader" {
-  project = var.gcp_project_id
+  project = var.project_id
   role    = "roles/containerregistry.ServiceAgent" # Allows pulling images from Container Registry
   member  = "serviceAccount:${google_service_account.gke_node_sa.email}"
 }
 
 resource "google_project_iam_member" "gke_node_sa_workload_identity_user" {
-  project = var.gcp_project_id
+  project = var.project_id
   role    = "roles/iam.workloadIdentityUser"
   member  = "serviceAccount:${google_service_account.gke_node_sa.email}"
 }
