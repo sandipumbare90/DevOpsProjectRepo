@@ -39,3 +39,26 @@ variable "max_node_count" {
   type        = number
 }
 
+variable "network_name" {
+  description = "The name of the existing VPC network."
+  type        = string
+  default     = "my-first-vpc" # Change this to your VPC's name
+}
+
+variable "subnet_name" {
+  description = "The name of the existing subnet."
+  type        = string
+  default     = "asia-south-sn-01" # Change this to your subnet's name
+}
+
+variable "ip_range_pods" {
+  description = "The name of the existing secondary IP range for pods."
+  type        = string
+  default     = "pods-range" # Change this to your Pods secondary range name
+}
+
+variable "ip_range_services" {
+  description = "The name of the existing secondary IP range for services."
+  type        = string
+  default     = "services-range" # Change this to your Services secondary range name
+}
