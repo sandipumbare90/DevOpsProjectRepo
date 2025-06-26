@@ -4,7 +4,7 @@ variable "project_id" {
   default     = "mydevopsproject-464107"
 }
 
-variable "gcp_region" {
+variable "region" {
   description = "The GCP region for the GKE cluster (e.g., 'us-central1')."
   type        = string
   default     = "asia-south1"
