@@ -1,6 +1,6 @@
 data "google_compute_network" "existing_vpc" {
   name    = var.network_name
-  project = var.project_id # Explicitly specify project for data source
+  project = "mydevopsproject-464107" # Explicitly specify project for data source
 }
 
 data "google_compute_subnetwork" "existing_gke_subnet" {
