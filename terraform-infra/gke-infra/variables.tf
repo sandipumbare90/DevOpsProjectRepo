@@ -1,4 +1,4 @@
-variable "gcp_project_id" {
+variable "project_id" {
   description = "The GCP project ID where the GKE cluster will be created."
   type        = string
   default     = "mydevopsproject-464107"
