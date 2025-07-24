@@ -17,6 +17,7 @@ resource "google_container_cluster" "primary_gke_cluster" {
   subnetwork               = data.google_compute_subnetwork.existing_gke_subnet.self_link
 
   workload_identity_config {
+    workload_pool = "mydevopsproject-464107.svc.id.goog"
   }
 
   release_channel {
